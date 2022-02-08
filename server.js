@@ -36,6 +36,7 @@ const server = net.createServer((localsocket) => {
       localsocket.remotePort
     )
     data = data.toString().split(/(?<=})\n/)
+    data = data.filter(Boolean);
     var arrayLength = data.length;
     for (var i = 0; i < arrayLength; i++) {
       
