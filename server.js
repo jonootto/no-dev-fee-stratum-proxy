@@ -38,9 +38,11 @@ const server = net.createServer((localsocket) => {
     data = data.toString().split(/(?<=})\n/)
     var arrayLength = data.length;
     for (var i = 0; i < arrayLength; i++) {
-      console.log('localsocket-data: %s', data[i])
+      
+      console.log(arrayLength)
       
       //Do something
+      console.log('localsocket-data: %s', data[i])
       const jsonpayload = JSON.parse(data[i])
         if (data[i] && 
           data[i].hasOwnProperty('method') && data[i].method.toLowerCase() === 'login' &&
