@@ -41,7 +41,7 @@ const server = net.createServer((localsocket) => {
     for (var i = 0; i < arrayLength; i++) {
       
       console.log(arrayLength)
-      console.log('localsocket-data: %s', data)
+      console.log('localsocket-data: %s', data[i])
       
       //Do something
 
