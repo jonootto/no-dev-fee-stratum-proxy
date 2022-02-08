@@ -1,7 +1,7 @@
 {
-  "name": "newtondev-no-dev-fee-stratum-proxy",
+  "name": "no-dev-fee-stratum-proxy",
   "version": "1.0.0",
-  "description": "",
+  "description": "Intercepts those scurvy dev fee switching bandits and ensures that you get 100% the mining shares. How dare they extort a dev fee while using open source libraries!",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -10,5 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "*"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonootto/no-dev-fee-stratum-proxy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonootto/no-dev-fee-stratum-proxy/issues"
+  },
+  "homepage": "https://github.com/jonootto/no-dev-fee-stratum-proxy#readme"
 }
