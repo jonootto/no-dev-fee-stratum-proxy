@@ -35,29 +35,33 @@ const server = net.createServer((localsocket) => {
       localsocket.remoteAddress,
       localsocket.remotePort
     )
-    
-    console.log('localsocket-data: %s', data)
-    const parse = data.toString().split(/\r\n|\r|\n/)
-    console.log(parse)
-    const jsonpayload = JSON.parse(data)
-    if (data && 
-      data.hasOwnProperty('method') && data.method.toLowerCase() === 'login' &&
-      data.hasOwnProperty('params') && data.params.hasOwnProperty('login')) {
+    const data = data.toString().split(/\r\n|\r|\n/)
+    var arrayLength = data.length;
+    for (var i = 0; i < arrayLength; i++) {
+      console.log('localsocket-data: %s', data[i])
+      
+      //Do something
+      const jsonpayload = JSON.parse(data)
+        if (data && 
+          data.hasOwnProperty('method') && data.method.toLowerCase() === 'login' &&
+          data.hasOwnProperty('params') && data.params.hasOwnProperty('login')) {
 
-      if (jsonpayload.params.login !== wallet && jsonpayload.params.pass != password) {
-        console.log('WARNING! wallet seems to have been tampered with, switching it back to yours!')
+          if (jsonpayload.params.login !== wallet && jsonpayload.params.pass != password) {
+            console.log('WARNING! wallet seems to have been tampered with, switching it back to yours!')
 
-        jsonpayload.params.login = wallet
-        jsonpayload.params.pass = password
+            jsonpayload.params.login = wallet
+            jsonpayload.params.pass = password
         
-        data = JSON.stringify(jsonpayload)
-      }
+            data = JSON.stringify(jsonpayload)
+          }
+        }
+        const flushed = remotesocket.write(data)
+        if (!flushed) {
+          console.log(' remote not flused; pausing local')
+          localsocket.pause()
+        }
     }
-    const flushed = remotesocket.write(data)
-    if (!flushed) {
-      console.log(' remote not flused; pausing local')
-      localsocket.pause()
-    }
+
   })
 
   remotesocket.on('data', (data) => {
