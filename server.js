@@ -37,7 +37,7 @@ const server = net.createServer((localsocket) => {
     )
     
     console.log('localsocket-data: %s', data)
-    const parse = btoa(data)
+    const parse = data.split(/\r\n|\r|\n/)
     console.log(parse)
     const jsonpayload = JSON.parse(data)
     if (data && 
