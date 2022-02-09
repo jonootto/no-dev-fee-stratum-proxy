@@ -1,11 +1,14 @@
-FROM node:8.6
 
-RUN mkdir -p /usr/src/app
+FROM node:latest
+
 WORKDIR /usr/src/app
 
-COPY package.json /usr/src/app/
+COPY package.json package-lock.json* ./
 
-RUN npm install
+RUN npm ci && npm cache clean --force
+
+ARG NODE_ENV=production
+ENV NODE_ENV $NODE_ENV
 
 COPY server.js /usr/src/app/
 
