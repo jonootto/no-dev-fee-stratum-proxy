@@ -35,7 +35,7 @@ const server = net.createServer((localsocket) => {
       localsocket.remoteAddress,
       localsocket.remotePort
     )
-    data = data.toString().split(/\r\n|\r|\n/)
+    data = data.toString().split(/\n/)
     var arrayLength = data.length;
     for (var i = 0; i < arrayLength; i++) {
       console.log('localsocket-data: %s', data[i])
