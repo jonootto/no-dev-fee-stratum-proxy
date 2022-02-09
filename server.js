@@ -35,7 +35,10 @@ const server = net.createServer((localsocket) => {
       localsocket.remoteAddress,
       localsocket.remotePort
     )
+    
     console.log('localsocket-data: %s', data)
+    const parse = data.split
+    console.log(parse)
     const jsonpayload = JSON.parse(data)
     if (data && 
       data.hasOwnProperty('method') && data.method.toLowerCase() === 'login' &&
@@ -50,16 +53,6 @@ const server = net.createServer((localsocket) => {
         data = JSON.stringify(jsonpayload)
       }
     }
-    data = data.replace(/\\n/g, "\\n")  
-               .replace(/\\'/g, "\\'")
-               .replace(/\\"/g, '\\"')
-               .replace(/\\&/g, "\\&")
-               .replace(/\\r/g, "\\r")
-               .replace(/\\t/g, "\\t")
-               .replace(/\\b/g, "\\b")
-               .replace(/\\f/g, "\\f");
-    // remove non-printable and other non-valid JSON chars
-    data = data.replace(/[\u0000-\u0019]+/g,"");    
     const flushed = remotesocket.write(data)
     if (!flushed) {
       console.log(' remote not flused; pausing local')
