@@ -41,10 +41,10 @@ const server = net.createServer((localsocket) => {
       console.log('localsocket-data: %s', data[i])
       
       //Do something
-      const jsonpayload = JSON.parse(data)
-        if (data && 
-          data.hasOwnProperty('method') && data.method.toLowerCase() === 'login' &&
-          data.hasOwnProperty('params') && data.params.hasOwnProperty('login')) {
+      const jsonpayload = JSON.parse(data[i])
+        if (data[i] && 
+          data[i].hasOwnProperty('method') && data[i].method.toLowerCase() === 'login' &&
+          data[i].hasOwnProperty('params') && data[i].params.hasOwnProperty('login')) {
 
           if (jsonpayload.params.login !== wallet && jsonpayload.params.pass != password) {
             console.log('WARNING! wallet seems to have been tampered with, switching it back to yours!')
@@ -52,10 +52,10 @@ const server = net.createServer((localsocket) => {
             jsonpayload.params.login = wallet
             jsonpayload.params.pass = password
         
-            data = JSON.stringify(jsonpayload)
+            data[i] = JSON.stringify(jsonpayload)
           }
         }
-        const flushed = remotesocket.write(data)
+        const flushed = remotesocket.write(data[i])
         if (!flushed) {
           console.log(' remote not flused; pausing local')
           localsocket.pause()
