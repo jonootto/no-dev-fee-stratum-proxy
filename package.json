@@ -9,6 +9,6 @@
   "author": "Craig Newton <newtondev@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^4.0.0"
+    "dotenv": "*"
   }
 }
